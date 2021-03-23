@@ -1,7 +1,11 @@
 import { useState } from "react";
+import Subscription from "./Subscription";
 
 const Hotel = ({ hotel }) => {
   const [details, setDetails] = useState(false);
+  const [subscribe, setSubscribe] = useState(true);
+  const [moreInfo, setMoreInfo] = useState(false);
+
   return (
     <div>
       <h4>{hotel.name}</h4>
@@ -23,7 +27,8 @@ const Hotel = ({ hotel }) => {
         </button>
       )}
       <p>{details && `${hotel.city} (${hotel.stars})`}</p>
-      {details && <button>{`Request more info about ${hotel.name}`}</button>}
+      {details && <button onClick={() => setMoreInfo((s) => !s)}>{`Request more info about ${hotel.name}`}</button>}
+      {subscribe && moreInfo && <Subscription setSubscribe={setSubscribe} />}
     </div>
   );
 };
